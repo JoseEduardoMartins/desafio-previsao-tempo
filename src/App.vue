@@ -1,13 +1,13 @@
 <template>
   <Header />
   <Form @findWeather="findWeather" />
-  <Capitals />
+  <Weather v-if="Object.keys(this.city).length" @cleanCity="cleanCity" :city="city" />
 </template>
 
 <script>
 import Header from './components/Header.vue';
 import Form from './components/Form.vue';
-import Capitals from './components/Capitals.vue';
+import Weather from './components/Weather.vue';
 
 import { getWeather } from './services/app';
 
@@ -25,21 +25,27 @@ export default {
       if (result.status == 200) {
         const { data } = result;
         this.city = {
-          description: data.weather.main,
-          temp: data.main.temp,
-          feels_like: data.main.feels_like,
-          temp_min: data.main.temp_min,
-          temp_max: data.main.temp_max,
+          name: data.name,
+          description: data.weather[0].description,
+          temp: Math.trunc(data.main.temp),
+          feels_like: Math.trunc(data.main.feels_like),
+          temp_min: Math.trunc(data.main.temp_min),
+          temp_max: Math.trunc(data.main.temp_max),
           humidity: data.main.humidity,
-          wind: data.wind.speed
+          wind: Math.trunc(data.wind.speed)
         };
       }
+    },
+    cleanCity () {
+      this.city = {};
+      document.getElementById("city_name").focus();
+      document.getElementById("city_name").value = '';
     }
   },
   components: {
     Header,
-    Form,
-    Capitals
+    Weather,
+    Form
   }
 }
 </script>

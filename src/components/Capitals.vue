@@ -16,9 +16,9 @@ export default {
     .container{
         width: 100%;
         border-top: 2px solid white;
-        padding: 30px;
     }
     .sub-title{
+        margin: 30px;
         color: white;
         font-size: 40px;
     }

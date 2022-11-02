@@ -1,7 +1,11 @@
 <template>
     <div class="container">
-        <input type="text" placeholder="Insira aqui o nome da cidade" v-model="name">
-        <button @click="this.$emit('findWeather', this.name)">buscar</button>
+        <form class="container_item" @submit="findWeather">
+            <input id="city_name" class="container_item_input" type="text" placeholder="Insira aqui o nome da cidade" v-model="name">
+            <button class="container_item_button" type="submit">
+                <font-awesome-icon icon="fa-solid fa-magnifying-glass" size="2x" color="#505050" />
+            </button>
+        </form>
     </div>
 </template>
 
@@ -12,6 +16,13 @@ export default {
         return {
             name: "",
         };
+    },
+    methods: {
+        findWeather (e) {
+            if (this.name.length) this.$emit('findWeather', this.name);
+            else alert("Nome invalido.");
+            e.preventDefault();
+        }
     }
 }
 </script>
@@ -19,19 +30,34 @@ export default {
 <style scoped>
     .container{
         width: 100%;
-        text-align: center;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: center;
     }
-    input{
+    .container_item{
         width: calc(100% - 50px);
-        padding: 15px 20px;
-        margin: 50px 0;
-        border: 1px solid #ccc;
-        box-sizing: border-box;
-        font-size: 15px;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: space-between;
     }
-    input:focus {
+    .container_item_input{
+        padding: 15px;
+        width: 100%;
         box-shadow: 0 0 0 0;
-        border: 1px solid #ccc;
         outline: 0;
+        border: none;
+        font-size: 16px;
+    }
+    .container_item_button{
+        cursor: pointer;
+        padding: 10px;
+        border: none;
+        background-color: #ffffff;
+    }
+    @media (min-width: 700px) {
+        .container{
+            width: 700px;
+            margin: auto;
+        }
     }
 </style>

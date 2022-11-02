@@ -14,11 +14,19 @@ export default {
 
 <style scoped>
     header {
-        text-align: center;
-        padding: 30px 0px 0px;
+        width: 100%;
     }
     .title{
+        margin: 30px;
         color: white;
         font-size: 50px;
+    }
+    @media (min-width: 700px) {
+        .header{
+            width: 700px;
+        }
+        .title{
+            text-align: center;
+        }
     }
 </style>
