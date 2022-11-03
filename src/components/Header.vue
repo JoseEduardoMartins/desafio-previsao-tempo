@@ -6,9 +6,7 @@
 
 <script>
 export default {
-  name: 'HeaderVue',
-  components: {
-  }
+  name: 'HeaderVue'
 }
 </script>
 
